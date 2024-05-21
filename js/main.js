@@ -5,13 +5,18 @@ const canvasMenu = document.querySelector('.mobile-menu');
 const menuHambIcon = document.querySelector('.hambMmenuIcon');
 
 const iconCarrito = document.querySelector('.shopping-cart-icon');
-const menuCarrito = document.querySelector('.product-detail');
+const menuCarrito = document.querySelector('.shoppingCartContainer');
 
 const cardsContainer = document.querySelector('.cards-container');
+
+const productDetailContainer = document.querySelector('#productDetail');
+
+const productContainerCloseIcon = document.querySelector('.product-detail-close');
 
 menuEmail.addEventListener('click', toggleDesktopMenu);
 menuHambIcon.addEventListener('click', toggleMobileMenu);
 iconCarrito.addEventListener('click', toggleCarritoMenu);
+productContainerCloseIcon.addEventListener('click', CloseProductDetailAside)
 
 
 function toggleDesktopMenu(){
@@ -25,6 +30,7 @@ function toggleDesktopMenu(){
 
 function toggleMobileMenu(){
     const IsCarritoClose = menuCarrito.classList.contains('inactive');
+    CloseProductDetailAside();
 
     if(!IsCarritoClose){
         menuCarrito.classList.add('inactive');
@@ -39,6 +45,16 @@ function toggleCarritoMenu(){
     if(!IsmobileMenuOpenClose){
         canvasMenu.classList.add('inactive');
     }
+  
+
+const isProductdetailContainerClosed = productDetailContainer.classList.contains('inactive');
+
+
+
+    if(!isProductdetailContainerClosed){
+        productDetailContainer.classList.add('inactive');
+    }
+
     menuCarrito.classList.toggle('inactive');
 }
 
@@ -66,6 +82,9 @@ productList.push(
 
     const productImg = document.createElement('img');
     productImg.setAttribute('src', product.image);
+    productImg.addEventListener('click', openProductdetail);
+
+    
     
 
     const productInfo = document.createElement('div');
@@ -100,5 +119,15 @@ productList.push(
 
 }
     }
+
+    function openProductdetail(){
+        menuCarrito.classList.add('inactive');
+        productDetailContainer.classList.remove('inactive');      
+    }
+
+    function CloseProductDetailAside(){        
+        productDetailContainer.classList.add('inactive');
+    }
+    
 
     renderProducts(productList)
